@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Saba are you Chaman ??</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden; /* No scrollbars */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+    }
+
+    /* Boundary box (arena) */
+    .boundary-box {
+      width: 90vw;   /* 90% of browser width */
+      height: 80vh;  /* 80% of browser height */
+      border: 4px solid white; /* visible boundary */
+      border-radius: 12px;
+      background: url('https://wallpapercave.com/wp/wp13899931.jpg') center/cover;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .message-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .yes-btn, .no-btn {
+      background-color: #ff7f50;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.2s;
+      position: relative;
+    }
+
+    .yes-btn:hover {
+      background-color: #ff5733;
+    }
+
+    @media (max-width: 600px) {
+      .title { font-size: 24px; }
+      .yes-btn, .no-btn { font-size: 16px; padding: 8px 15px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Boundary Box -->
+  <div class="boundary-box" id="boundary">
+    <div class="message-box">
+      <h1 class="title">Saba, are you Chaman ??</h1>
+      <div class="btn-group">
+        <button class="yes-btn" id="yesBtn">Yes I'm Chaman</button><br>
+        <button class="no-btn" id="noBtn">No I'm Not. You're Chaman</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // YES button action
+    document.getElementById("yesBtn").onclick = function() {
+      alert("😂 I knew it, You are Chaman!");
+    };
+
+    // NO button action (restricted to boundary box)
+    const noBtn = document.getElementById("noBtn");
+    const boundary = document.getElementById("boundary");
+
+    noBtn.addEventListener("mouseover", () => {
+      noBtn.style.position = "absolute";
+      noBtn.style.margin = "0";
+
+      const boxRect = boundary.getBoundingClientRect();
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+      const margin = 10; // safe space
+
+      const maxX = boxRect.width - btnWidth - margin;
+      const maxY = boxRect.height - btnHeight - margin;
+
+      const x = Math.floor(Math.random() * (maxX - margin) + margin);
+      const y = Math.floor(Math.random() * (maxY - margin) + margin);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+  </script>
+</body>
+</html>
